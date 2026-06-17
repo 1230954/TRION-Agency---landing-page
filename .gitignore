@@ -1,0 +1,8 @@
+/trion-next/node_modules/
+/trion-next/.next/
+
+node_modules/
+.next/
+
+.env
+.env.local
