@@ -111,7 +111,7 @@ export default function Hero() {
             Ajudamos PMEs portuguesas a crescer com automação de processos, agentes de IA e presença digital de topo.
           </p>
           <div className="hero-ctas">
-            <a href="#contacto" className="btn btn-primary">Marcar Diagnóstico Gratuito →</a>
+            <a href="https://calendly.com/officialtrionagency/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Marcar Diagnóstico Gratuito →</a>
             <a href="#servicos" className="btn btn-ghost">Ver os nossos serviços</a>
           </div>
           <div className="hero-metrics">

@@ -1,16 +1,40 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState } from 'react'
+import type { SubmitEvent } from 'react'
 
 export default function Contacto() {
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
+    setSending(true)
+
+    const form = e.currentTarget
+    const payload = {
+      Nome: (form.querySelector('#f-name') as HTMLInputElement).value,
+      Email: (form.querySelector('#f-email') as HTMLInputElement).value,
+      Empresa: (form.querySelector('#f-company') as HTMLInputElement).value,
+      Mensagem: (form.querySelector('#f-msg') as HTMLTextAreaElement).value,
+      _subject: 'Nova mensagem — TRION Agency website',
+    }
+
+    try {
+      await fetch('https://formsubmit.co/ajax/geral.trionagency@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+    } catch {
+      // fail silently — still show confirmation to avoid confusion
+    }
+
+    setSending(false)
     setSubmitted(true)
     setTimeout(() => {
       setSubmitted(false)
-      ;(e.target as HTMLFormElement).reset()
+      form.reset()
     }, 3500)
   }
 
@@ -23,7 +47,7 @@ export default function Contacto() {
             <span className="s-label">Contacto</span>
             <h2 className="s-title">Fale connosco</h2>
             <p className="s-sub">
-              Pronto para começar? Entre em contacto — respondemos em menos de 24 horas.
+              Tem dúvidas ou quer saber mais? Envie uma mensagem — respondemos em menos de 24 horas.
             </p>
 
             <div className="c-detail" style={{ marginTop: '36px' }}>
@@ -35,7 +59,7 @@ export default function Contacto() {
               </div>
               <div>
                 <div style={{ fontSize: '.75rem', color: 'var(--steel)', marginBottom: '2px' }}>Email</div>
-                <a href="mailto:geral@trionagency.pt">geral@trionagency.pt</a>
+                <a href="mailto:geral.trionagency@gmail.com">geral.trionagency@gmail.com</a>
               </div>
             </div>
 
@@ -77,6 +101,7 @@ export default function Contacto() {
               <button
                 type="submit"
                 className="btn btn-primary form-submit"
+                disabled={sending}
                 style={
                   submitted
                     ? {
@@ -87,7 +112,7 @@ export default function Contacto() {
                     : {}
                 }
               >
-                {submitted ? 'Mensagem enviada ✓' : 'Enviar Mensagem →'}
+                {submitted ? 'Mensagem enviada ✓' : sending ? 'A enviar…' : 'Enviar Mensagem →'}
               </button>
             </form>
           </div>

@@ -11,7 +11,7 @@ export default function CTABand() {
         <p className="cta-sub">
           Marque um diagnóstico gratuito de 30 minutos e descubra exatamente como podemos ajudar a sua empresa a crescer e a ser mais eficiente.
         </p>
-        <a href="#contacto" className="btn btn-primary">
+        <a href="https://calendly.com/officialtrionagency/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
           Marcar Diagnóstico Gratuito →
         </a>
         <p className="cta-note">Sem compromisso. Sem custos ocultos.</p>
