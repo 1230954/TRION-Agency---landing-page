@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd trion-next && npm install && npm run build",
+  "outputDirectory": "trion-next/.next",
+  "installCommand": "echo skip",
+  "framework": "nextjs"
+}
