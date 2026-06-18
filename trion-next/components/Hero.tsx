@@ -1,141 +1,98 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { motion, type Variants } from 'framer-motion'
+import { AuroraBackground } from '@/components/ui/aurora-background'
 
-interface Node {
-  x: number
-  y: number
-  vx: number
-  vy: number
-  r: number
-  p: number
+const stagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.13, delayChildren: 0.2 } },
+}
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 }
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')!
-    let nodes: Node[] = []
-    let raf: number
-
-    function sizeCanvas() {
-      const w = canvas!.parentElement!.offsetWidth
-      canvas!.width = w
-      canvas!.height = w
-      buildNodes(w)
-    }
-
-    function buildNodes(s: number) {
-      nodes = Array.from({ length: 28 }, () => ({
-        x: Math.random() * s,
-        y: Math.random() * s,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        r: Math.random() * 1.8 + 1,
-        p: Math.random() * Math.PI * 2,
-      }))
-    }
-
-    function drawNet() {
-      const s = canvas!.width
-      ctx.clearRect(0, 0, s, s)
-
-      nodes.forEach(n => {
-        n.x += n.vx; n.y += n.vy; n.p += 0.018
-        if (n.x < 0 || n.x > s) n.vx *= -1
-        if (n.y < 0 || n.y > s) n.vy *= -1
-      })
-
-      const D = 115
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x
-          const dy = nodes[i].y - nodes[j].y
-          const d = Math.sqrt(dx * dx + dy * dy)
-          if (d < D) {
-            ctx.beginPath()
-            ctx.strokeStyle = `rgba(79,209,197,${(1 - d / D) * 0.38})`
-            ctx.lineWidth = 0.7
-            ctx.moveTo(nodes[i].x, nodes[i].y)
-            ctx.lineTo(nodes[j].x, nodes[j].y)
-            ctx.stroke()
-          }
-        }
-      }
-
-      nodes.forEach(n => {
-        const pr = n.r + Math.sin(n.p) * 0.6
-        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, pr * 7)
-        g.addColorStop(0, 'rgba(79,209,197,.28)')
-        g.addColorStop(1, 'rgba(79,209,197,0)')
-        ctx.beginPath(); ctx.arc(n.x, n.y, pr * 7, 0, Math.PI * 2)
-        ctx.fillStyle = g; ctx.fill()
-        ctx.beginPath(); ctx.arc(n.x, n.y, pr, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(79,209,197,.92)'; ctx.fill()
-      })
-
-      raf = requestAnimationFrame(drawNet)
-    }
-
-    function handleResize() {
-      cancelAnimationFrame(raf)
-      sizeCanvas()
-      drawNet()
-    }
-
-    sizeCanvas()
-    drawNet()
-    window.addEventListener('resize', handleResize)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
   return (
-    <section id="hero">
-      <div className="hero-inner">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-dot" />
-            Automação Inteligente para PMEs
-          </div>
-          <h1 className="hero-h1">
-            Automatize o que repete.<br />
-            <em>Acelere</em> o que importa.
-          </h1>
-          <p className="hero-sub">
-            Ajudamos PMEs portuguesas a crescer com automação de processos, agentes de IA e presença digital de topo.
-          </p>
-          <div className="hero-ctas">
-            <a href="https://calendly.com/gmopimenta/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Marcar Diagnóstico Gratuito →</a>
-            <a href="#servicos" className="btn btn-ghost">Ver os nossos serviços</a>
-          </div>
-          <div className="hero-metrics">
-            <div className="metric">
-              <div className="metric-val">-40<span>%</span></div>
-              <div className="metric-lbl">tarefas manuais</div>
-            </div>
-            <div className="metric">
-              <div className="metric-val">2–4<span> sem</span></div>
-              <div className="metric-lbl">tempo de implementação</div>
-            </div>
-            <div className="metric">
-              <div className="metric-val">24<span>/7</span></div>
-              <div className="metric-lbl">processos a trabalhar</div>
-            </div>
-          </div>
-        </div>
+    <AuroraBackground
+      id="hero"
+      className="!bg-[#121418] pt-[var(--nav-h)]"
+      showRadialGradient
+    >
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="relative flex flex-col items-center text-center px-6 w-full max-w-5xl mx-auto"
+      >
+        <motion.div variants={fadeUp} className="hero-badge mb-8">
+          <span className="badge-dot" />
+          Automação Inteligente para PMEs
+        </motion.div>
 
-        <div className="hero-visual">
-          <div className="canvas-wrap">
-            <canvas ref={canvasRef} id="net-canvas" />
+        <motion.h1
+          variants={fadeUp}
+          className="mb-6 font-bold"
+          style={{
+            fontFamily: 'var(--ff-head)',
+            fontSize: 'clamp(2.8rem, 5.5vw, 5.2rem)',
+            lineHeight: '1.06',
+            letterSpacing: '-0.04em',
+            color: 'var(--mist)',
+          }}
+        >
+          Automatize o que repete.<br />
+          <em className="not-italic" style={{ color: 'var(--cyan)' }}>Acelere</em> o que importa.
+        </motion.h1>
+
+        <motion.p
+          variants={fadeUp}
+          className="mb-10 max-w-xl"
+          style={{
+            color: 'var(--steel)',
+            fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+            lineHeight: '1.75',
+          }}
+        >
+          Ajudamos PMEs portuguesas a crescer com automação de processos,
+          agentes de IA e presença digital de topo.
+        </motion.p>
+
+        <motion.div variants={fadeUp} className="hero-ctas">
+          <a
+            href="https://calendly.com/gmopimenta/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            style={{ fontSize: '.95rem', padding: '13px 28px' }}
+          >
+            Marcar Diagnóstico Gratuito →
+          </a>
+          <a
+            href="#servicos"
+            className="btn btn-ghost"
+            style={{ fontSize: '.95rem', padding: '13px 28px' }}
+          >
+            Ver os nossos serviços
+          </a>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="hero-metrics w-full max-w-lg mt-16">
+          <div className="metric">
+            <div className="metric-val">-40<span>%</span></div>
+            <div className="metric-lbl">tarefas manuais</div>
           </div>
-        </div>
-      </div>
-    </section>
+          <div className="metric">
+            <div className="metric-val">2–4<span> sem</span></div>
+            <div className="metric-lbl">tempo de implementação</div>
+          </div>
+          <div className="metric">
+            <div className="metric-val">24<span>/7</span></div>
+            <div className="metric-lbl">processos a trabalhar</div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AuroraBackground>
   )
 }

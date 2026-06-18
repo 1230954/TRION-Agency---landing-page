@@ -1,10 +1,12 @@
 import type { Config } from 'tailwindcss'
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette"
 
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -21,9 +23,26 @@ const config: Config = {
       screens: {
         desktop: '1024px',
       },
+      animation: {
+        aurora: "aurora 60s linear infinite",
+      },
+      keyframes: {
+        aurora: {
+          from: { backgroundPosition: "50% 50%, 50% 50%" },
+          to: { backgroundPosition: "350% 50%, 350% 50%" },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [addVariablesForColors],
+}
+
+function addVariablesForColors({ addBase, theme }: any) {
+  const allColors = flattenColorPalette(theme("colors"))
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  )
+  addBase({ ":root": newVars })
 }
 
 export default config

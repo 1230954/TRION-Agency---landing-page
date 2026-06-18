@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-PT" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="pt-PT" className={`${spaceGrotesk.variable} ${inter.variable} dark`}>
       <body>{children}</body>
     </html>
   )
