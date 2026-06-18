@@ -1,52 +1,120 @@
-const reasons = [
+'use client'
+import { motion } from 'framer-motion'
+import { FadeIn } from './FadeIn'
+
+const pillars = [
   {
-    delay: '',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
-    title: 'Especialistas em PMEs',
-    desc: 'Não somos uma consultora genérica. Focamo-nos exclusivamente em empresas como a sua, com soluções ajustadas à sua realidade, dimensão e orçamento.',
+    stat: '< 4',
+    unit: 'semanas',
+    title: 'Resultados visíveis depressa',
+    desc: 'Implementamos rapidamente e medimos resultados concretos desde o primeiro mês. Sem reuniões intermináveis, sem promessas vazias.',
   },
   {
-    delay: 'd1',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    title: 'Resultados em Semanas',
-    desc: 'Implementamos depressa e medimos resultados concretos. Sem meses de espera, sem reuniões intermináveis, sem promessas vazias.',
+    stat: '100%',
+    unit: 'personalizado',
+    title: 'Feito para o seu negócio',
+    desc: 'Não vendemos pacotes pré-definidos. Cada solução é desenhada especificamente para os seus processos, equipa e objetivos.',
   },
   {
-    delay: 'd2',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.38 2 2 0 013.6 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.65a16 16 0 006 6l.92-.92a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-      </svg>
-    ),
-    title: 'Suporte Contínuo',
-    desc: 'Estamos sempre disponíveis para ajustar, melhorar e escalar as suas automações à medida que o seu negócio cresce e evolui.',
+    stat: '24/7',
+    unit: 'suporte contínuo',
+    title: 'Estamos sempre presentes',
+    desc: 'Não desaparecemos depois da implementação. Acompanhamos, ajustamos e escalamos à medida que o seu negócio cresce.',
   },
 ]
 
 export default function PorqueTRION() {
   return (
-    <section id="porque-trion" className="section">
-      <div className="wrap">
-        <span className="s-label">Porquê a TRION</span>
-        <h2 className="s-title reveal">A diferença que importa</h2>
-        <div className="why-grid">
-          {reasons.map(r => (
-            <div key={r.title} className={`why-card reveal${r.delay ? ' ' + r.delay : ''}`}>
-              <div className="why-icon">{r.icon}</div>
-              <h3 className="why-title">{r.title}</h3>
-              <p className="why-desc">{r.desc}</p>
-            </div>
+    <section
+      id="porque-trion"
+      style={{
+        position: 'relative',
+        zIndex: 1,
+        padding: 'clamp(80px, 12vw, 160px) clamp(24px, 6vw, 80px)',
+      }}
+    >
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <FadeIn>
+          <div style={{ marginBottom: '80px' }}>
+            <span style={{
+              fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em',
+              textTransform: 'uppercase', color: 'var(--cyan)',
+              display: 'block', marginBottom: '20px',
+            }}>
+              Porquê a TRION
+            </span>
+            <h2 style={{
+              fontFamily: 'var(--ff-head)',
+              fontSize: 'clamp(2.4rem, 4.5vw, 4rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.04em',
+              color: 'var(--mist)',
+              lineHeight: 1.05,
+            }}>
+              A diferença que importa
+            </h2>
+          </div>
+        </FadeIn>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '1px',
+          background: 'var(--border)',
+        }}
+          className="pillar-grid"
+        >
+          {pillars.map((p, i) => (
+            <FadeIn key={p.title} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ backgroundColor: 'rgba(35,40,49,0.6)' }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  padding: 'clamp(40px, 5vw, 64px)',
+                  background: 'var(--obsidian)',
+                  height: '100%',
+                }}
+              >
+                <div style={{
+                  fontFamily: 'var(--ff-head)',
+                  fontSize: 'clamp(2.8rem, 4vw, 4.2rem)',
+                  fontWeight: 800,
+                  color: 'var(--cyan)',
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1,
+                  marginBottom: '8px',
+                }}>
+                  {p.stat}
+                </div>
+                <div style={{
+                  fontSize: '.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--steel)',
+                  marginBottom: '28px',
+                }}>
+                  {p.unit}
+                </div>
+                <h3 style={{
+                  fontFamily: 'var(--ff-head)',
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  color: 'var(--mist)',
+                  marginBottom: '14px',
+                  letterSpacing: '-0.01em',
+                }}>
+                  {p.title}
+                </h3>
+                <p style={{
+                  fontSize: '.88rem',
+                  color: 'var(--steel)',
+                  lineHeight: 1.8,
+                }}>
+                  {p.desc}
+                </p>
+              </motion.div>
+            </FadeIn>
           ))}
         </div>
       </div>

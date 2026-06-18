@@ -14,6 +14,16 @@
   --cyan-40: rgba(79,209,197,0.40);
   --border: rgba(138,147,162,0.14);
   --nav-h: 72px;
+
+  /* Aurora Background — Tailwind color vars required by the component */
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
 }
 
 /* ── BASE ── */
@@ -28,15 +38,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Fixed cyan grid background */
+/* Subtle dot grid — very low opacity for premium feel */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(79,209,197,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,209,197,0.045) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: radial-gradient(rgba(79,209,197,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
 }
@@ -439,6 +447,15 @@ footer {
   .services-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .foot-top { grid-template-columns: 1fr 1fr; }
+
+  /* New section grids */
+  .como-grid { grid-template-columns: 1fr !important; }
+  .como-grid > * > div { border-right: none !important; border-bottom: 1px solid var(--border); }
+  .pillar-grid { grid-template-columns: 1fr !important; }
+  .caso-card { grid-template-columns: 1fr !important; }
+  .caso-card > div:first-child { border-right: none !important; border-bottom: 1px solid var(--border); }
+  .faq-grid { grid-template-columns: 1fr !important; }
+  .faq-grid > div:first-child > div { position: static !important; }
 }
 
 @media (max-width: 768px) {
@@ -446,12 +463,6 @@ footer {
   .nav-links, .nav-cta-btn { display: none; }
   .burger { display: flex; }
   .mob-menu { display: block; }
-
-  #hero { padding: calc(var(--nav-h) + 48px) 24px 64px; }
-  .hero-metrics { gap: 0; }
-  .metric { padding: 0 16px; }
-  .metric:first-child { padding-left: 0; }
-  .metric:last-child { padding-right: 0; }
 
   .section { padding: 80px 24px; }
   #tech { padding: 32px 24px; }
@@ -464,4 +475,7 @@ footer {
   .foot-top { grid-template-columns: 1fr; gap: 36px; }
   .foot-bottom { flex-direction: column; gap: 10px; text-align: center; }
   footer { padding: 48px 24px 28px; }
+
+  /* Services list — hide tag on mobile */
+  .svc-tag { display: none; }
 }

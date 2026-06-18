@@ -1,13 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import type { SubmitEvent } from 'react'
+import { useState, FormEvent } from 'react'
 
 export default function Contacto() {
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
 
-  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setSending(true)
 

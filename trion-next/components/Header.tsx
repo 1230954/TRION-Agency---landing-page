@@ -1,14 +1,14 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const NAV_LINKS = [
   { href: '#servicos', label: 'Serviços' },
-  { href: '#como-funciona', label: 'Como Funciona' },
-  { href: '#porque-trion', label: 'Porquê a Trion' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '#casos', label: 'Casos' },
+  { href: '#como-funciona', label: 'Processo' },
+  { href: '#faq', label: 'FAQ' },
 ]
 
 export default function Header() {
@@ -22,7 +22,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Scroll spy for active nav link
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
     const obs = new IntersectionObserver(
@@ -57,8 +56,8 @@ export default function Header() {
             ))}
           </ul>
 
-          <a href="#contacto" className="btn btn-primary nav-cta-btn">
-            Marcar Diagnóstico
+          <a href="https://calendly.com/gmopimenta/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary nav-cta-btn">
+            Diagnóstico Gratuito
           </a>
 
           <button
@@ -81,8 +80,14 @@ export default function Header() {
             </li>
           ))}
         </ul>
-        <a href="#contacto" className="btn btn-primary" onClick={closeMenu}>
-          Marcar Diagnóstico Gratuito →
+        <a
+          href="https://calendly.com/gmopimenta/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary"
+          onClick={closeMenu}
+        >
+          Diagnóstico Gratuito →
         </a>
       </div>
     </>

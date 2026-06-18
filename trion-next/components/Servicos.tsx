@@ -1,72 +1,133 @@
+'use client'
+import { motion } from 'framer-motion'
+import { FadeIn } from './FadeIn'
+
 const services = [
   {
-    delay: '',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" />
-        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
-      </svg>
-    ),
+    num: '01',
+    tag: 'Operações',
     title: 'Automação de Processos',
-    desc: 'Eliminamos tarefas repetitivas com fluxos automatizados que trabalham por si, 24 horas por dia, 7 dias por semana. Menos erros, mais tempo para o que importa.',
+    desc: 'Eliminamos tarefas repetitivas com fluxos automatizados que trabalham por si, 24 horas por dia. Menos erros, mais tempo para o que importa.',
   },
   {
-    delay: 'd1',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M9.5 2A2.5 2.5 0 017 4.5v15A2.5 2.5 0 009.5 22h5a2.5 2.5 0 002.5-2.5v-15A2.5 2.5 0 0014.5 2h-5z" />
-        <circle cx="12" cy="9" r="2" />
-        <path d="M10 14h4M10 17h4" />
-      </svg>
-    ),
-    title: 'Agentes de Inteligência Artificial',
-    desc: 'Desenvolvemos agentes de IA personalizados que tomam decisões, respondem clientes e processam dados de forma autónoma, adaptados ao seu negócio.',
+    num: '02',
+    tag: 'Inteligência Artificial',
+    title: 'Agentes de IA',
+    desc: 'Agentes autónomos que tomam decisões, respondem clientes e processam dados — completamente adaptados ao seu negócio.',
   },
   {
-    delay: 'd2',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-        <path d="M7 8h10M7 11h6" />
-      </svg>
-    ),
+    num: '03',
+    tag: 'Presença Digital',
     title: 'Websites & Landing Pages',
-    desc: 'Criamos presenças digitais premium que convertem visitantes em clientes, com design moderno, performance otimizada e foco em resultados.',
+    desc: 'Presenças digitais que convertem visitantes em clientes, com design moderno, performance de topo e foco total em resultados.',
   },
   {
-    delay: 'd3',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M18 20V10M12 20V4M6 20v-6" />
-        <path d="M2 20h20" />
-      </svg>
-    ),
+    num: '04',
+    tag: 'Dados',
     title: 'Dashboards & Analytics',
-    desc: 'Transformamos dados dispersos em painéis visuais claros e intuitivos, para que possa tomar decisões mais rápidas e fundamentadas.',
+    desc: 'Dados dispersos transformados em painéis visuais claros e intuitivos, para decisões mais rápidas e fundamentadas.',
   },
 ]
 
 export default function Servicos() {
   return (
-    <section id="servicos" className="section">
-      <div className="wrap">
-        <div className="services-hd">
-          <span className="s-label">Os nossos serviços</span>
-          <h2 className="s-title reveal">O que fazemos</h2>
-          <p className="s-sub reveal d1">
-            Soluções digitais que transformam a forma como a sua empresa opera, comunica e cresce.
-          </p>
-        </div>
-        <div className="services-grid">
-          {services.map(s => (
-            <div key={s.title} className={`svc-card reveal${s.delay ? ' ' + s.delay : ''}`}>
-              <div className="svc-icon">{s.icon}</div>
-              <h3 className="svc-title">{s.title}</h3>
-              <p className="svc-desc">{s.desc}</p>
-              <a href="#contacto" className="svc-more">Saber mais →</a>
-            </div>
+    <section
+      id="servicos"
+      style={{
+        position: 'relative',
+        zIndex: 1,
+        padding: 'clamp(80px, 12vw, 160px) clamp(24px, 6vw, 80px)',
+      }}
+    >
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <FadeIn>
+          <div style={{ marginBottom: '80px' }}>
+            <span style={{
+              fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em',
+              textTransform: 'uppercase', color: 'var(--cyan)',
+              display: 'block', marginBottom: '20px',
+            }}>
+              Os nossos serviços
+            </span>
+            <h2 style={{
+              fontFamily: 'var(--ff-head)',
+              fontSize: 'clamp(2.4rem, 4.5vw, 4rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.04em',
+              color: 'var(--mist)',
+              lineHeight: 1.05,
+            }}>
+              O que fazemos
+            </h2>
+          </div>
+        </FadeIn>
+
+        <div style={{ borderTop: '1px solid var(--border)' }}>
+          {services.map((s, i) => (
+            <FadeIn key={s.num} delay={i * 0.08}>
+              <motion.div
+                whileHover={{ backgroundColor: 'rgba(35,40,49,0.35)' }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '72px 1fr auto',
+                  gap: '40px',
+                  padding: 'clamp(32px, 4vw, 52px) clamp(16px, 2vw, 24px)',
+                  borderBottom: '1px solid var(--border)',
+                  alignItems: 'start',
+                  cursor: 'default',
+                  transition: 'background 0.25s',
+                  position: 'relative',
+                }}
+              >
+                <span style={{
+                  fontFamily: 'var(--ff-head)',
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  color: 'var(--steel)',
+                  paddingTop: '4px',
+                }}>
+                  {s.num}
+                </span>
+                <div>
+                  <h3 style={{
+                    fontFamily: 'var(--ff-head)',
+                    fontSize: 'clamp(1.3rem, 2vw, 1.7rem)',
+                    fontWeight: 600,
+                    color: 'var(--mist)',
+                    letterSpacing: '-0.02em',
+                    marginBottom: '14px',
+                    lineHeight: 1.2,
+                  }}>
+                    {s.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '.92rem',
+                    color: 'var(--steel)',
+                    lineHeight: 1.75,
+                    maxWidth: '520px',
+                  }}>
+                    {s.desc}
+                  </p>
+                </div>
+                <span style={{
+                  fontSize: '.65rem',
+                  fontWeight: 700,
+                  letterSpacing: '.14em',
+                  textTransform: 'uppercase',
+                  color: 'var(--cyan)',
+                  background: 'rgba(79,209,197,0.08)',
+                  border: '1px solid rgba(79,209,197,0.15)',
+                  padding: '5px 12px',
+                  borderRadius: '4px',
+                  whiteSpace: 'nowrap',
+                  alignSelf: 'start',
+                  marginTop: '4px',
+                }}>
+                  {s.tag}
+                </span>
+              </motion.div>
+            </FadeIn>
           ))}
         </div>
       </div>
