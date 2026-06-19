@@ -480,6 +480,15 @@ footer {
   .svc-tag { display: none; }
 }
 
+/* ── SOBRE NÓS PADDING (responsive via CSS, not inline style) ── */
+#sobre {
+  padding: clamp(44px, 8vw, 100px) clamp(24px, 6vw, 80px);
+}
+@media (min-width: 769px) {
+  /* Extra breathing room between SobreNos and TechStrip on desktop */
+  #sobre { padding-bottom: clamp(120px, 15vw, 180px); }
+}
+
 /* ── SOBRE NÓS ── */
 .sobre-grid {
   display: grid;
@@ -654,6 +663,48 @@ footer {
   background: var(--cyan); width: 22px; border-radius: 3px;
 }
 
+/* ── CONTACT FORM MINIMAL ── */
+.contact-form-minimal {
+  padding: 48px 0 0;
+}
+.cfm-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+.cfm-field {
+  padding-bottom: 28px;
+  position: relative;
+}
+.cfm-label {
+  display: block;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 10px;
+}
+.cfm-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 8px 0;
+  color: var(--mist);
+  font-family: var(--ff-body), sans-serif;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .25s;
+}
+.cfm-input::placeholder { color: rgba(138,147,162,.35); }
+.cfm-input:focus { border-bottom-color: var(--cyan); }
+.cfm-textarea {
+  min-height: 96px;
+  resize: none;
+}
+
 /* ── RESPONSIVE ADDITIONS ── */
 @media (max-width: 1024px) {
   .sobre-grid { grid-template-columns: 1fr; gap: 52px; }
@@ -669,12 +720,36 @@ footer {
   .acc-tag { display: none; }
   .acc-desc { padding-left: calc(48px + 14px + 12px); }
 
-  /* Hero CTAs */
-  .hero-ctas { justify-content: center; }
+  /* Hero — mobile fix:
+     1. height:auto overrides Tailwind's h-[100vh] so content never overflows the section
+     2. justify-content:flex-start stops vertical centering that pushes badge into the navbar
+     3. Reduced top padding keeps badge safely below the fixed nav
+  */
+  #hero {
+    height: auto;
+    min-height: 100svh;
+    justify-content: flex-start;
+    padding-top: calc(var(--nav-h) + 36px);
+    padding-bottom: 64px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .hero-metrics { margin-top: 36px; padding-top: 28px; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+
+  /* Metrics — reduce internal padding and font so "24/7" doesn't clip */
+  .metric { padding-right: 10px; }
+  .metric:last-child { padding-left: 10px; }
+  .metric:not(:first-child):not(:last-child) { padding-left: 10px; }
+  .metric-val { font-size: 1.45rem; }
 
   /* Casos mobile */
   .casos-images { height: 240px; }
   .caso-metrics { gap: 24px; }
   .caso-metric-val { font-size: 1.9rem; }
   .caso-arrow { display: none; }
+
+  /* Contact form mobile */
+  .cfm-row { grid-template-columns: 1fr; gap: 0; }
+  .contact-form-minimal { padding-top: 0; }
 }

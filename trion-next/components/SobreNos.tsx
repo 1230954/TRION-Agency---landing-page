@@ -43,10 +43,16 @@ export default function SobreNos() {
       style={{
         position: 'relative',
         zIndex: 1,
-        padding: 'clamp(44px, 8vw, 100px) clamp(24px, 6vw, 80px)',
         borderBottom: '1px solid var(--border)',
       }}
     >
+      {/* Glowing separator at section boundary */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: '8%', right: '8%',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, rgba(79,209,197,0.45) 50%, transparent)',
+      }} />
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <div className="sobre-grid">
           {/* Left: identity */}
