@@ -67,7 +67,7 @@ export default function PorqueTRION() {
           {pillars.map((p, i) => (
             <FadeIn key={p.title} delay={i * 0.1}>
               <motion.div
-                whileHover={{ backgroundColor: 'rgba(35,40,49,0.6)' }}
+                whileHover={{ backgroundColor: 'rgba(20,20,20,0.6)' }}
                 transition={{ duration: 0.2 }}
                 style={{
                   padding: 'clamp(40px, 5vw, 64px)',

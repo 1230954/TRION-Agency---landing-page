@@ -51,7 +51,7 @@ export default function SobreNos() {
         position: 'absolute',
         top: 0, left: '8%', right: '8%',
         height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(79,209,197,0.45) 50%, transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(46,211,168,0.45) 50%, transparent)',
       }} />
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <div className="sobre-grid">

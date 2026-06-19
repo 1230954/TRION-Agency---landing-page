@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <AuroraBackground
       id="hero"
-      className="!bg-[#121418] pt-[var(--nav-h)]"
+      className="!bg-[#060606] pt-[var(--nav-h)]"
       showRadialGradient
     >
       <motion.div
@@ -33,17 +33,18 @@ export default function Hero() {
 
         <motion.h1
           variants={fadeUp}
-          className="mb-6 font-bold"
+          className="mb-6"
           style={{
             fontFamily: 'var(--ff-head)',
-            fontSize: 'clamp(2.8rem, 5.5vw, 5.2rem)',
+            fontSize: 'clamp(3.1rem, 6.2vw, 5.8rem)',
+            fontWeight: 600,
             lineHeight: '1.06',
-            letterSpacing: '-0.04em',
+            letterSpacing: '-0.03em',
             color: 'var(--mist)',
           }}
         >
           Automatize o que repete.<br />
-          <em className="not-italic" style={{ color: 'var(--cyan)' }}>Acelere</em> o que importa.
+          <em style={{ fontFamily: 'var(--ff-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--cyan)' }}>Acelere</em> o que importa.
         </motion.h1>
 
         <motion.p

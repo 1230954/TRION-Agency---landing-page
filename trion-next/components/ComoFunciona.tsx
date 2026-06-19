@@ -66,7 +66,7 @@ export default function ComoFunciona() {
           {steps.map((s, i) => (
             <FadeIn key={s.num} delay={i * 0.12}>
               <motion.div
-                whileHover={{ backgroundColor: 'rgba(18,20,24,0.5)' }}
+                whileHover={{ backgroundColor: 'rgba(6,6,6,0.5)' }}
                 transition={{ duration: 0.2 }}
                 style={{
                   padding: 'clamp(40px, 5vw, 64px)',
@@ -83,7 +83,7 @@ export default function ComoFunciona() {
                   fontFamily: 'var(--ff-head)',
                   fontSize: 'clamp(5rem, 10vw, 9rem)',
                   fontWeight: 800,
-                  color: 'rgba(79,209,197,0.04)',
+                  color: 'rgba(46,211,168,0.04)',
                   lineHeight: 1,
                   userSelect: 'none',
                   pointerEvents: 'none',
@@ -98,8 +98,8 @@ export default function ComoFunciona() {
                   width: '44px',
                   height: '44px',
                   borderRadius: '50%',
-                  border: '1px solid rgba(79,209,197,0.3)',
-                  background: 'rgba(79,209,197,0.06)',
+                  border: '1px solid rgba(46,211,168,0.3)',
+                  background: 'rgba(46,211,168,0.06)',
                   fontFamily: 'var(--ff-head)',
                   fontSize: '.82rem',
                   fontWeight: 700,

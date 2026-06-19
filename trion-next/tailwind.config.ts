@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: '#121418',
-        graphite: '#232831',
-        mist: '#E8EAED',
-        steel: '#8A93A2',
-        'trion-cyan': '#4FD1C5',
+        obsidian: '#060606',
+        graphite: '#141414',
+        mist: '#F5F5F3',
+        steel: '#B8B8B8',
+        'trion-cyan': '#2ED3A8',
       },
       fontFamily: {
         head: ['var(--ff-head)', 'sans-serif'],

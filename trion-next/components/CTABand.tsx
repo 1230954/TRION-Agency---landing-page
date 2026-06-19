@@ -24,7 +24,7 @@ export default function CTABand() {
         transform: 'translate(-50%, -50%)',
         width: '800px',
         height: '600px',
-        background: 'radial-gradient(ellipse at center, rgba(79,209,197,0.07) 0%, transparent 65%)',
+        background: 'radial-gradient(ellipse at center, rgba(46,211,168,0.07) 0%, transparent 65%)',
         pointerEvents: 'none',
       }} />
 
@@ -46,8 +46,8 @@ export default function CTABand() {
             lineHeight: 1.05,
             marginBottom: '24px',
           }}>
-            Transforme o seu negócio.<br />
-            <em style={{ fontStyle: 'normal', color: 'var(--cyan)' }}>Comece hoje.</em>
+                        Transforme o seu negócio.<br />
+            <em style={{ fontFamily: 'var(--ff-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--cyan)' }}>Comece hoje.</em>
           </h2>
           <p style={{
             fontSize: 'clamp(.95rem, 1.4vw, 1.1rem)',
@@ -65,7 +65,7 @@ export default function CTABand() {
             href="https://calendly.com/gmopimenta/30min"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.03, boxShadow: '0 12px 40px rgba(79,209,197,0.3)' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 12px 40px rgba(46,211,168,0.3)' }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
             style={{
