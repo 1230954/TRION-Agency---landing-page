@@ -479,3 +479,202 @@ footer {
   /* Services list — hide tag on mobile */
   .svc-tag { display: none; }
 }
+
+/* ── SOBRE NÓS ── */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.sobre-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sobre-pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+}
+.sobre-pillar:first-child { padding-top: 0; }
+.sobre-pillar:last-child { border-bottom: none; padding-bottom: 0; }
+.sobre-pillar-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: var(--cyan-10);
+  border: 1px solid var(--cyan-20);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.sobre-pillar-icon svg {
+  width: 18px; height: 18px;
+  stroke: var(--cyan); fill: none; stroke-width: 1.5;
+}
+.sobre-pillar-title {
+  font-size: .95rem; font-weight: 600;
+  color: var(--mist); margin-bottom: 6px;
+  font-family: var(--ff-head);
+}
+.sobre-pillar-desc {
+  font-size: .84rem; color: var(--steel); line-height: 1.7;
+}
+
+/* ── ACCORDION (SERVICOS) ── */
+.acc-item { border-bottom: 1px solid var(--border); }
+.acc-trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: grid;
+  grid-template-columns: 64px 1fr auto 28px;
+  gap: 32px;
+  padding: clamp(20px, 2.5vw, 32px) clamp(12px, 2vw, 20px);
+  align-items: center; text-align: left;
+  transition: background .2s;
+  border-radius: 4px;
+}
+.acc-trigger:hover { background: rgba(35,40,49,.22); }
+.acc-num {
+  font-family: var(--ff-head); font-size: .95rem;
+  font-weight: 500; color: var(--steel);
+}
+.acc-title {
+  font-family: var(--ff-head);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
+}
+.acc-tag {
+  font-size: .63rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cyan);
+  background: rgba(79,209,197,.08);
+  border: 1px solid rgba(79,209,197,.15);
+  padding: 4px 11px; border-radius: 4px;
+  white-space: nowrap;
+}
+.acc-chevron {
+  width: 22px; height: 22px;
+  stroke: var(--steel); flex-shrink: 0;
+}
+.acc-desc {
+  font-size: .92rem; color: var(--steel);
+  line-height: 1.8; max-width: 580px;
+  padding: 0 clamp(12px, 2vw, 20px) clamp(20px, 2.5vw, 32px);
+  padding-left: calc(64px + 32px + clamp(12px, 2vw, 20px));
+}
+
+/* ── CASOS CAROUSEL ── */
+.casos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.casos-images {
+  position: relative;
+  width: 100%;
+  height: clamp(280px, 38vw, 460px);
+}
+.caso-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04);
+}
+.casos-content {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  gap: 32px;
+}
+.caso-sector-tag {
+  display: inline-block;
+  font-size: .63rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--cyan);
+  background: rgba(79,209,197,.08);
+  border: 1px solid rgba(79,209,197,.15);
+  padding: 4px 12px; border-radius: 4px;
+  margin-bottom: 20px;
+}
+.caso-problema {
+  font-family: var(--ff-head);
+  font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+  font-weight: 500; color: var(--mist);
+  line-height: 1.5; letter-spacing: -.015em;
+  margin-bottom: 14px;
+}
+.caso-solucao {
+  font-size: .88rem; color: var(--steel);
+  line-height: 1.85; margin-bottom: 28px;
+}
+.caso-metrics {
+  display: flex; gap: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.caso-metric-val {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800; letter-spacing: -.04em; line-height: 1;
+}
+.caso-metric-val.cyan { color: var(--cyan); }
+.caso-metric-val.mist { color: var(--mist); }
+.caso-metric-lbl {
+  font-size: .74rem; color: var(--steel);
+  margin-top: 7px; letter-spacing: .01em;
+}
+.caso-nav {
+  display: flex; align-items: center; gap: 10px;
+  padding-top: 4px;
+}
+.caso-arrow {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(18,20,24,.7);
+  border: 1px solid var(--border);
+  color: var(--mist);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s; flex-shrink: 0;
+}
+.caso-arrow:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--obsidian);
+  transform: scale(1.06);
+}
+.caso-dots {
+  display: flex; align-items: center; gap: 7px; margin-left: 6px;
+}
+.caso-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); border: none; cursor: pointer;
+  transition: all .35s; padding: 0;
+}
+.caso-dot.active {
+  background: var(--cyan); width: 22px; border-radius: 3px;
+}
+
+/* ── RESPONSIVE ADDITIONS ── */
+@media (max-width: 1024px) {
+  .sobre-grid { grid-template-columns: 1fr; gap: 52px; }
+  .sobre-pillar-desc { max-width: 480px; }
+  .casos-grid { grid-template-columns: 1fr; gap: 52px; }
+  .casos-images { height: clamp(240px, 50vw, 380px); }
+  .casos-content { min-height: auto; }
+}
+
+@media (max-width: 768px) {
+  /* Accordion mobile */
+  .acc-trigger { grid-template-columns: 48px 1fr 24px; gap: 14px; }
+  .acc-tag { display: none; }
+  .acc-desc { padding-left: calc(48px + 14px + 12px); }
+
+  /* Hero CTAs */
+  .hero-ctas { justify-content: center; }
+
+  /* Casos mobile */
+  .casos-images { height: 240px; }
+  .caso-metrics { gap: 24px; }
+  .caso-metric-val { font-size: 1.9rem; }
+  .caso-arrow { display: none; }
+}

@@ -1,5 +1,6 @@
 'use client'
-import { motion } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FadeIn } from './FadeIn'
 
 const casos = [
@@ -11,7 +12,7 @@ const casos = [
     metricaLabel: 'tempo administrativo',
     metrica2: '+35%',
     metrica2Label: 'taxa de conversão',
-    cor: 'rgba(79,209,197,0.06)',
+    src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=900&auto=format&fit=crop',
   },
   {
     sector: 'Saúde',
@@ -21,7 +22,7 @@ const casos = [
     metricaLabel: 'faltas às consultas',
     metrica2: '24/7',
     metrica2Label: 'atendimento automático',
-    cor: 'rgba(79,209,197,0.03)',
+    src: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=900&auto=format&fit=crop',
   },
   {
     sector: 'Comércio B2B',
@@ -31,11 +32,101 @@ const casos = [
     metricaLabel: 'capacidade de encomendas',
     metrica2: '0',
     metrica2Label: 'erros manuais de processamento',
-    cor: 'rgba(79,209,197,0.06)',
+    src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop',
   },
 ]
 
+function getImageStyle(
+  index: number,
+  activeIndex: number,
+  length: number,
+  containerWidth: number,
+): React.CSSProperties {
+  const gap = Math.min(72, Math.max(36, containerWidth * 0.13))
+  const stickUp = gap * 0.72
+  const isActive = index === activeIndex
+  const isLeft = (activeIndex - 1 + length) % length === index
+  const isRight = (activeIndex + 1) % length === index
+
+  if (isActive) return {
+    zIndex: 3, opacity: 1, pointerEvents: 'auto',
+    transform: 'translateX(0) translateY(0) scale(1) rotateY(0deg)',
+    transition: 'all 0.8s cubic-bezier(.4,2,.3,1)',
+  }
+  if (isLeft) return {
+    zIndex: 2, opacity: 0.72, pointerEvents: 'none',
+    transform: `translateX(-${gap}px) translateY(-${stickUp}px) scale(0.84) rotateY(18deg)`,
+    transition: 'all 0.8s cubic-bezier(.4,2,.3,1)',
+  }
+  if (isRight) return {
+    zIndex: 2, opacity: 0.72, pointerEvents: 'none',
+    transform: `translateX(${gap}px) translateY(-${stickUp}px) scale(0.84) rotateY(-18deg)`,
+    transition: 'all 0.8s cubic-bezier(.4,2,.3,1)',
+  }
+  return { zIndex: 1, opacity: 0, pointerEvents: 'none', transition: 'all 0.8s cubic-bezier(.4,2,.3,1)' }
+}
+
 export default function Casos() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [containerWidth, setContainerWidth] = useState(400)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const touchStartX = useRef(0)
+  const touchStartY = useRef(0)
+  const length = casos.length
+
+  useEffect(() => {
+    const el = imageRef.current
+    if (!el) return
+    const obs = new ResizeObserver(() => setContainerWidth(el.offsetWidth))
+    obs.observe(el)
+    setContainerWidth(el.offsetWidth)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    autoplayRef.current = setInterval(() => setActiveIndex(p => (p + 1) % length), 5500)
+    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current) }
+  }, [length])
+
+  // Non-passive touchmove listener: blocks browser horizontal scroll while swiping
+  useEffect(() => {
+    const el = imageRef.current
+    if (!el) return
+    const onMove = (e: TouchEvent) => {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX.current)
+      const dy = Math.abs(e.touches[0].clientY - touchStartY.current)
+      if (dx > dy && dx > 6) e.preventDefault()
+    }
+    el.addEventListener('touchmove', onMove, { passive: false })
+    return () => el.removeEventListener('touchmove', onMove)
+  }, [])
+
+  const go = useCallback((dir: 1 | -1) => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current)
+    setActiveIndex(p => (p + dir + length) % length)
+  }, [length])
+
+  const goTo = useCallback((i: number) => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current)
+    setActiveIndex(i)
+  }, [])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = touchStartX.current - e.changedTouches[0].clientX
+    const dy = touchStartY.current - e.changedTouches[0].clientY
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      go(dx > 0 ? 1 : -1)
+    }
+  }
+
+  const active = casos[activeIndex]
+
   return (
     <section
       id="casos"
@@ -50,7 +141,7 @@ export default function Casos() {
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <FadeIn>
-          <div style={{ marginBottom: '80px' }}>
+          <div style={{ marginBottom: '72px' }}>
             <span style={{
               fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em',
               textTransform: 'uppercase', color: 'var(--cyan)',
@@ -72,112 +163,109 @@ export default function Casos() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          {casos.map((c, i) => (
-            <FadeIn key={c.sector} delay={i * 0.1}>
-              <motion.div
-                whileHover={{ backgroundColor: 'rgba(18,20,24,0.6)' }}
-                transition={{ duration: 0.25 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '0',
-                  background: 'rgba(18,20,24,0.35)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '2px',
-                  overflow: 'hidden',
-                }}
-                className="caso-card"
-              >
-                {/* Left: context */}
-                <div style={{
-                  padding: 'clamp(40px, 5vw, 60px)',
-                  borderRight: '1px solid var(--border)',
-                }}>
-                  <span style={{
-                    display: 'inline-block',
-                    fontSize: '.65rem', fontWeight: 700, letterSpacing: '.14em',
-                    textTransform: 'uppercase', color: 'var(--cyan)',
-                    background: 'rgba(79,209,197,0.08)',
-                    border: '1px solid rgba(79,209,197,0.15)',
-                    padding: '4px 12px', borderRadius: '4px',
-                    marginBottom: '28px',
-                  }}>
-                    {c.sector}
-                  </span>
-                  <p style={{
-                    fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
-                    fontWeight: 500,
-                    color: 'var(--mist)',
-                    lineHeight: 1.6,
-                    marginBottom: '20px',
-                    fontFamily: 'var(--ff-head)',
-                    letterSpacing: '-0.01em',
-                  }}>
-                    "{c.problema}"
-                  </p>
-                  <p style={{
-                    fontSize: '.88rem',
-                    color: 'var(--steel)',
-                    lineHeight: 1.8,
-                  }}>
-                    {c.solucao}
-                  </p>
-                </div>
+        <div className="casos-grid">
+          {/* ── Image carousel ── */}
+          <FadeIn>
+            <div
+              className="casos-images"
+              ref={imageRef}
+              style={{ perspective: '1200px' }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {casos.map((c, i) => (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  key={c.sector}
+                  src={c.src}
+                  alt={c.sector}
+                  className="caso-img"
+                  style={getImageStyle(i, activeIndex, length, containerWidth)}
+                />
+              ))}
+            </div>
+          </FadeIn>
 
-                {/* Right: metrics */}
-                <div style={{
-                  padding: 'clamp(40px, 5vw, 60px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  gap: '40px',
-                  background: c.cor,
-                }}>
+          {/* ── Content ── */}
+          <div className="casos-content">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.32, ease: 'easeInOut' }}
+                style={{ flex: 1 }}
+              >
+                <span className="caso-sector-tag">{active.sector}</span>
+
+                <p className="caso-problema">
+                  &ldquo;{active.problema}&rdquo;
+                </p>
+
+                <p className="caso-solucao">{active.solucao}</p>
+
+                <div className="caso-metrics">
                   <div>
-                    <div style={{
-                      fontFamily: 'var(--ff-head)',
-                      fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
-                      fontWeight: 800,
-                      color: 'var(--cyan)',
-                      letterSpacing: '-0.04em',
-                      lineHeight: 1,
-                    }}>
-                      {c.metrica}
+                    <div className="caso-metric-val cyan">
+                      {active.metrica.split('').map((ch, i) => (
+                        <motion.span
+                          key={`${activeIndex}-m1-${i}`}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.055, duration: 0.22 }}
+                          style={{ display: 'inline-block' }}
+                        >
+                          {ch}
+                        </motion.span>
+                      ))}
                     </div>
-                    <div style={{
-                      fontSize: '.78rem',
-                      color: 'var(--steel)',
-                      marginTop: '8px',
-                      letterSpacing: '.02em',
-                    }}>
-                      {c.metricaLabel}
-                    </div>
+                    <div className="caso-metric-lbl">{active.metricaLabel}</div>
                   </div>
                   <div>
-                    <div style={{
-                      fontFamily: 'var(--ff-head)',
-                      fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
-                      fontWeight: 800,
-                      color: 'var(--mist)',
-                      letterSpacing: '-0.04em',
-                      lineHeight: 1,
-                    }}>
-                      {c.metrica2}
+                    <div className="caso-metric-val mist">
+                      {active.metrica2.split('').map((ch, i) => (
+                        <motion.span
+                          key={`${activeIndex}-m2-${i}`}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.08 + i * 0.055, duration: 0.22 }}
+                          style={{ display: 'inline-block' }}
+                        >
+                          {ch}
+                        </motion.span>
+                      ))}
                     </div>
-                    <div style={{
-                      fontSize: '.78rem',
-                      color: 'var(--steel)',
-                      marginTop: '8px',
-                      letterSpacing: '.02em',
-                    }}>
-                      {c.metrica2Label}
-                    </div>
+                    <div className="caso-metric-lbl">{active.metrica2Label}</div>
                   </div>
                 </div>
               </motion.div>
-            </FadeIn>
-          ))}
+            </AnimatePresence>
+
+            {/* ── Navigation ── */}
+            <div className="caso-nav">
+              <button className="caso-arrow" onClick={() => go(-1)} aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button className="caso-arrow" onClick={() => go(1)} aria-label="Próximo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+              <div className="caso-dots">
+                {casos.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`caso-dot${i === activeIndex ? ' active' : ''}`}
+                    onClick={() => goTo(i)}
+                    aria-label={`Caso ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

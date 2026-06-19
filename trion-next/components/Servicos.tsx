@@ -1,5 +1,6 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FadeIn } from './FadeIn'
 
 const services = [
@@ -30,6 +31,8 @@ const services = [
 ]
 
 export default function Servicos() {
+  const [open, setOpen] = useState<number>(0)
+
   return (
     <section
       id="servicos"
@@ -41,7 +44,7 @@ export default function Servicos() {
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <FadeIn>
-          <div style={{ marginBottom: '80px' }}>
+          <div style={{ marginBottom: '64px' }}>
             <span style={{
               fontSize: '.68rem', fontWeight: 700, letterSpacing: '.18em',
               textTransform: 'uppercase', color: 'var(--cyan)',
@@ -63,72 +66,64 @@ export default function Servicos() {
         </FadeIn>
 
         <div style={{ borderTop: '1px solid var(--border)' }}>
-          {services.map((s, i) => (
-            <FadeIn key={s.num} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ backgroundColor: 'rgba(35,40,49,0.35)' }}
-                transition={{ duration: 0.2 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '72px 1fr auto',
-                  gap: '40px',
-                  padding: 'clamp(32px, 4vw, 52px) clamp(16px, 2vw, 24px)',
-                  borderBottom: '1px solid var(--border)',
-                  alignItems: 'start',
-                  cursor: 'default',
-                  transition: 'background 0.25s',
-                  position: 'relative',
-                }}
-              >
-                <span style={{
-                  fontFamily: 'var(--ff-head)',
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  color: 'var(--steel)',
-                  paddingTop: '4px',
-                }}>
-                  {s.num}
-                </span>
-                <div>
-                  <h3 style={{
-                    fontFamily: 'var(--ff-head)',
-                    fontSize: 'clamp(1.3rem, 2vw, 1.7rem)',
-                    fontWeight: 600,
-                    color: 'var(--mist)',
-                    letterSpacing: '-0.02em',
-                    marginBottom: '14px',
-                    lineHeight: 1.2,
-                  }}>
-                    {s.title}
-                  </h3>
-                  <p style={{
-                    fontSize: '.92rem',
-                    color: 'var(--steel)',
-                    lineHeight: 1.75,
-                    maxWidth: '520px',
-                  }}>
-                    {s.desc}
-                  </p>
+          {services.map((s, i) => {
+            const isOpen = open === i
+            return (
+              <FadeIn key={s.num} delay={i * 0.06}>
+                <div className="acc-item">
+                  <button
+                    className="acc-trigger"
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="acc-num">{s.num}</span>
+                    <span
+                      className="acc-title"
+                      style={{ color: isOpen ? 'var(--cyan)' : 'var(--mist)', transition: 'color .25s' }}
+                    >
+                      {s.title}
+                    </span>
+                    <span className="acc-tag">{s.tag}</span>
+                    <motion.svg
+                      className="acc-chevron"
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </motion.svg>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="body"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.38, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <motion.div
+                          className="acc-desc"
+                          initial={{ y: -8 }}
+                          animate={{ y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.05 }}
+                        >
+                          {s.desc}
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <span style={{
-                  fontSize: '.65rem',
-                  fontWeight: 700,
-                  letterSpacing: '.14em',
-                  textTransform: 'uppercase',
-                  color: 'var(--cyan)',
-                  background: 'rgba(79,209,197,0.08)',
-                  border: '1px solid rgba(79,209,197,0.15)',
-                  padding: '5px 12px',
-                  borderRadius: '4px',
-                  whiteSpace: 'nowrap',
-                  alignSelf: 'start',
-                  marginTop: '4px',
-                }}>
-                  {s.tag}
-                </span>
-              </motion.div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            )
+          })}
         </div>
       </div>
     </section>

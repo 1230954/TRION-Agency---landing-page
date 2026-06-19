@@ -78,7 +78,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="hero-metrics w-full max-w-lg mt-16">
+        <motion.div variants={fadeUp} className="hero-metrics w-full mt-16">
           <div className="metric">
             <div className="metric-val">-40<span>%</span></div>
             <div className="metric-lbl">tarefas manuais</div>

@@ -1,10 +1,10 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
+import SobreNos from '@/components/SobreNos'
 import TechStrip from '@/components/TechStrip'
 import Servicos from '@/components/Servicos'
 import Casos from '@/components/Casos'
 import ComoFunciona from '@/components/ComoFunciona'
-import Clientes from '@/components/Clientes'
 import PorqueTRION from '@/components/PorqueTRION'
 import FAQ from '@/components/FAQ'
 import CTABand from '@/components/CTABand'
@@ -17,11 +17,11 @@ export default function Home() {
     <>
       <Header />
       <Hero />
+      <SobreNos />
       <TechStrip />
       <Servicos />
       <Casos />
       <ComoFunciona />
-      <Clientes />
       <PorqueTRION />
       <FAQ />
       <CTABand />
