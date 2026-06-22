@@ -62,6 +62,24 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Trion Agency',
+  url: 'https://www.trion.pt',
+  logo: 'https://www.trion.pt/logo-square.png',
+  description: 'Automatizamos processos, implementamos IA e criamos presença digital para ajudar PMEs a crescer com menos operação manual.',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'PT',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'geral@trionagency.pt',
+    contactType: 'customer service',
+  },
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-PT" className={`${inter.variable} ${instrumentSerif.variable} dark`}>
@@ -69,6 +87,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700,800&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>{children}</body>
