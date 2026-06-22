@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Obsidian background, rounded corners -->
+  <rect width="100" height="100" rx="16" fill="#121418"/>
+  <!-- Thin-stroke "T" with round caps — mirrors TRION logo weight -->
+  <line x1="13" y1="29" x2="87" y2="29" stroke="#E8EAED" stroke-width="6.5" stroke-linecap="round"/>
+  <line x1="50" y1="29" x2="50" y2="79" stroke="#E8EAED" stroke-width="6.5" stroke-linecap="round"/>
+</svg>
