@@ -56,8 +56,8 @@ export default function Hero() {
             lineHeight: '1.75',
           }}
         >
-          Ajudamos PMEs portuguesas a crescer com automação de processos,
-          agentes de IA e presença digital de topo.
+          Ajudamos PMEs portuguesas a crescer através da automação de processos, 
+          agentes de IA e soluções digitais.
         </motion.p>
 
         <motion.div variants={fadeUp} className="hero-ctas">

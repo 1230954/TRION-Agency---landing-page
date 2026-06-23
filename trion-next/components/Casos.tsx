@@ -6,7 +6,7 @@ import { FadeIn } from './FadeIn'
 const casos = [
   {
     sector: 'Imobiliário',
-    problema: 'Gestão manual de 200+ leads por mês em folhas de cálculo',
+    problema: 'Gestão manual de centenas de leads por mês em folhas de cálculo',
     solucao: 'Sistema automático de qualificação, triagem e follow-up de leads integrado com o CRM existente.',
     metrica: '-80%',
     metricaLabel: 'tempo administrativo',
@@ -16,7 +16,7 @@ const casos = [
   },
   {
     sector: 'Saúde',
-    problema: '1 em cada 4 consultas perdida por falha na comunicação com pacientes',
+    problema: 'Perda recorrente de consultas por falhas na comunicação com pacientes',
     solucao: 'Agente de IA para confirmação automática de consultas, gestão de remarcações e resposta a perguntas frequentes.',
     metrica: '-60%',
     metricaLabel: 'faltas às consultas',
@@ -25,13 +25,13 @@ const casos = [
     src: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=900&auto=format&fit=crop',
   },
   {
-    sector: 'Comércio B2B',
-    problema: 'Processo de encomendas fragmentado em 3 ferramentas diferentes com erros constantes',
-    solucao: 'Automação completa do fluxo order-to-fulfillment — da encomenda ao armazém, transportadora e faturação.',
+    sector: 'Retalho e Logística',
+    problema: 'Processo de encomendas distribuído por várias ferramentas, com atrasos e erros frequentes',
+    solucao: 'Automatização completa do processo: da encomenda ao armazém, transportadora e faturação.',
     metrica: '3×',
-    metricaLabel: 'capacidade de encomendas',
+    metricaLabel: 'capacidade operacional',
     metrica2: '0',
-    metrica2Label: 'erros manuais de processamento',
+    metrica2Label: 'erros de processamento',
     src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop',
   },
 ]

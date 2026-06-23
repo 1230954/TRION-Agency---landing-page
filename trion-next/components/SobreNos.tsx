@@ -5,7 +5,7 @@ import { FadeIn } from './FadeIn'
 const pillars = [
   {
     title: 'Baseados em Portugal',
-    desc: 'Equipa local que conhece o mercado português e fala a sua língua — sem intermediários.',
+    desc: 'Equipa local que conhece a realidade das empresas portuguesas e trabalha consigo de forma direta, rápida e próxima.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/>
@@ -15,7 +15,7 @@ const pillars = [
   },
   {
     title: 'Foco exclusivo em PMEs',
-    desc: 'Não somos uma agência genérica. Especialistas em pequenas e médias empresas que querem crescer.',
+    desc: 'Criamos automações e soluções digitais para pequenas e médias empresas que querem crescer com mais eficiência e menos operação manual.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2"/>
@@ -26,8 +26,8 @@ const pillars = [
     ),
   },
   {
-    title: 'Resultados em 2 a 4 semanas',
-    desc: 'Do diagnóstico gratuito ao primeiro resultado visível. Sem burocracia, sem jargão técnico.',
+    title: 'Primeiros resultados em semanas, não meses',
+    desc: 'Do diagnóstico à implementação inicial, entregamos soluções rápidas e focadas em impacto, sem burocracia nem complexidade desnecessária.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -82,8 +82,10 @@ export default function SobreNos() {
                 lineHeight: 1.85,
                 maxWidth: '420px',
               }}>
-                Uma agência portuguesa especializada em automação inteligente e presença digital.
-                Ajudamos PMEs a crescer mais depressa — com menos trabalho manual e mais decisões baseadas em dados.
+                Uma agência portuguesa especializada em automação inteligente e soluções digitais.
+                Criamos sistemas, agentes de IA e experiências digitais que reduzem trabalho manual, 
+                melhoram decisões e aceleram o crescimento.
+
               </p>
             </div>
           </FadeIn>

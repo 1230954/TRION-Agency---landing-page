@@ -14,19 +14,19 @@ const services = [
     num: '02',
     tag: 'Inteligência Artificial',
     title: 'Agentes de IA',
-    desc: 'Agentes autónomos que tomam decisões, respondem clientes e processam dados — completamente adaptados ao seu negócio.',
+    desc: 'Criamos agentes de IA que respondem a clientes, processam informação e executam tarefas adaptadas aos processos do seu negócio.',
   },
   {
     num: '03',
     tag: 'Presença Digital',
     title: 'Websites & Landing Pages',
-    desc: 'Presenças digitais que convertem visitantes em clientes, com design moderno, performance de topo e foco total em resultados.',
+    desc: 'Desenvolvemos experiências digitais focadas em conversão, combinando design moderno, rapidez e uma experiência pensada para gerar resultados.',
   },
   {
     num: '04',
     tag: 'Dados',
     title: 'Dashboards & Analytics',
-    desc: 'Dados dispersos transformados em painéis visuais claros e intuitivos, para decisões mais rápidas e fundamentadas.',
+    desc: 'Transformamos dados dispersos em dashboards claros e intuitivos para decisões mais rápidas e informadas.',
   },
 ]
 
