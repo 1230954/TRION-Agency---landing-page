@@ -12,7 +12,7 @@ const casos = [
     metricaLabel: 'tempo administrativo',
     metrica2: '+35%',
     metrica2Label: 'taxa de conversão',
-    src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=900&auto=format&fit=crop',
+    src: '/images/caso-imobiliario.png',
   },
   {
     sector: 'Saúde',
@@ -22,7 +22,7 @@ const casos = [
     metricaLabel: 'faltas às consultas',
     metrica2: '24/7',
     metrica2Label: 'atendimento automático',
-    src: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=900&auto=format&fit=crop',
+    src: '/images/caso-saude.png',
   },
   {
     sector: 'Retalho e Logística',
@@ -32,7 +32,7 @@ const casos = [
     metricaLabel: 'capacidade operacional',
     metrica2: '0',
     metrica2Label: 'erros de processamento',
-    src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop',
+    src: '/images/caso-retalho.png',
   },
 ]
 
